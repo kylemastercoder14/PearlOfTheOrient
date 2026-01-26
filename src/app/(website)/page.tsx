@@ -1,4 +1,4 @@
-/* eslint-disable @next/next/no-img-element */
+
 import { Navbar } from "@/components/website/Navbar";
 import { CookieConsent } from "@/components/website/CookieConsent";
 import { Button } from "@/components/ui/button";
@@ -434,7 +434,7 @@ export default function Page() {
             <HeroVideoDialog
               className="block dark:hidden"
               animationStyle="from-center"
-              videoSrc="/pearl-video.mp4"
+              videoSrc="https://res.cloudinary.com/dovvdfxru/video/upload/v1769411349/V3_The_Pearl_Chaplaincy_Promotional_Video_mwinwn.mp4"
               thumbnailAlt="Hero Video"
             />
           </div>
