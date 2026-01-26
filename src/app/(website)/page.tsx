@@ -310,7 +310,7 @@ export default function Page() {
   }
 
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen">
       <ScrollProgress className="top-0 z-60" />
       <Navbar />
 
