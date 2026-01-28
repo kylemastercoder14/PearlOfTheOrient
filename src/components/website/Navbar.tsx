@@ -5,8 +5,11 @@ import { Search } from "lucide-react";
 import { useEffect, useState } from "react";
 import { NavMenu } from "@/components/website/NavMenu";
 import { SearchContainer } from "@/components/website/SearchContainer";
+import { usePathname, useRouter } from "next/navigation";
 
 export const Navbar = () => {
+  const router = useRouter();
+  const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
 
@@ -33,12 +36,71 @@ export const Navbar = () => {
     };
   }, [isSearchOpen]);
 
+  if (pathname !== "/") {
+    return (
+      <header className={`fixed inset-x-0 top-0 z-50 text-white h-14 sm:h-16`}>
+        {/* ::before pseudo element - Extended gradient background */}
+        <div
+          className={`pointer-events-none absolute left-0 top-0 w-full h-full bg-[#032a0d]`}
+        />
+
+        <div className="relative px-3 sm:px-6 md:px-10 flex h-full w-full items-start py-2 sm:py-3 md:py-5 justify-between transition-all duration-300">
+          {/* Menu Button */}
+          <NavMenu />
+
+          {/* Center Logo/Text - Transitions between two states */}
+          <div className="flex-1 flex justify-center">
+            {/* Full logo layout (visible when not scrolled) */}
+            <div
+              onClick={() => router.push("/")}
+              className={`flex flex-col items-center text-center cursor-pointer transition-all duration-300 max-w-full pointer-events-none opacity-0 absolute`}
+            >
+              <Image
+                src="/main/logo.png"
+                alt="Site seal"
+                width={100}
+                height={100}
+                priority
+                className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 xl:w-25 xl:h-25"
+              />
+              <div className="mt-1 sm:mt-2 text-xs sm:text-sm md:text-base lg:text-lg xl:text-2xl font-serif px-2">
+                PEARL OF THE ORIENT INTERNATIONAL AUXILARY
+              </div>
+              <div className="font-serif text-[10px] sm:text-xs md:text-sm lg:text-base xl:text-xl px-2">
+                CHAPLAIN VALUES EDUCATORS INC.
+              </div>
+            </div>
+
+            {/* Compact text layout (visible when scrolled) */}
+            <div
+              onClick={() => router.push("/")}
+              className={`absolute left-1/2 top-1/2 -translate-x-1/2 cursor-pointer -translate-y-1/2 text-center transition-all duration-300 max-w-[90%] pointer-events-auto opacity-100`}
+            >
+              <div className="font-serif text-[8px] sm:text-[10px] md:text-xs lg:text-sm xl:text-base tracking-wide px-2 wrap-break-word">
+                PEARL OF THE ORIENT INTERNATIONAL AUXILARY CHAPLAIN VALUES
+                EDUCATORS INC.
+              </div>
+            </div>
+          </div>
+
+          {/* Search Button */}
+          <Search
+            className="size-5 sm:size-6 md:size-7 cursor-pointer shrink-0"
+            onClick={() => setIsSearchOpen(true)}
+          />
+          <SearchContainer
+            isOpen={isSearchOpen}
+            onClose={() => setIsSearchOpen(false)}
+          />
+        </div>
+      </header>
+    );
+  }
+
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 text-white transition-all duration-300 ${
-        isScrolled
-          ? "h-14 sm:h-16"
-          : "h-32 sm:h-36 md:h-40"
+        isScrolled ? "h-14 sm:h-16" : "h-32 sm:h-36 md:h-40"
       }`}
     >
       {/* ::before pseudo element - Extended gradient background */}
@@ -58,7 +120,8 @@ export const Navbar = () => {
         <div className="flex-1 flex justify-center">
           {/* Full logo layout (visible when not scrolled) */}
           <div
-            className={`flex flex-col items-center text-center transition-all duration-300 max-w-full ${
+            onClick={() => router.push("/")}
+            className={`flex flex-col items-center cursor-pointer text-center transition-all duration-300 max-w-full ${
               isScrolled
                 ? "pointer-events-none opacity-0 absolute"
                 : "pointer-events-auto opacity-100"
@@ -70,7 +133,7 @@ export const Navbar = () => {
               width={100}
               height={100}
               priority
-              className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 xl:w-[100px] xl:h-[100px]"
+              className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 xl:w-25 xl:h-25"
             />
             <div className="mt-1 sm:mt-2 text-xs sm:text-sm md:text-base lg:text-lg xl:text-2xl font-serif px-2">
               PEARL OF THE ORIENT INTERNATIONAL AUXILARY
@@ -82,7 +145,8 @@ export const Navbar = () => {
 
           {/* Compact text layout (visible when scrolled) */}
           <div
-            className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center transition-all duration-300 max-w-[90%] ${
+            onClick={() => router.push("/")}
+            className={`absolute left-1/2 top-1/2 -translate-x-1/2 cursor-pointer -translate-y-1/2 text-center transition-all duration-300 max-w-[90%] ${
               isScrolled
                 ? "pointer-events-auto opacity-100"
                 : "pointer-events-none opacity-0"

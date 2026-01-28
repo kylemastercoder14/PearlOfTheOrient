@@ -171,7 +171,7 @@ export const NavMenu = () => {
                   href="#"
                   className="block text-2xl tracking-wide transition-colors hover:underline"
                 >
-                  Learn & Grow
+                  School of Chaplaincy
                 </a>
               </li>
               <li>
@@ -210,13 +210,13 @@ export const NavMenu = () => {
 
             {/* Secondary Links */}
             <div className="mt-16 space-y-4 border-t border-white/10 pt-8">
-              <a href="#" className="block transition-colors hover:underline">
+              <a href="/about-pearl-of-the-orient" className="block transition-colors hover:underline">
                 About Pearl of the Orient
               </a>
               <a href="#" className="block transition-colors hover:underline">
-                School of Chaplaincy
+                Office of the Chief Chaplain
               </a>
-              <a href="#" className="block transition-colors hover:underline">
+              <a href="/organizational-structure" className="block transition-colors hover:underline">
                 Organizational Structure
               </a>
               <a href="#" className="block transition-colors hover:underline">
@@ -231,7 +231,7 @@ export const NavMenu = () => {
               <a href="#" className="block transition-colors hover:underline">
                 Frequently Asked Questions
               </a>
-              <a href="#" className="block transition-colors hover:underline">
+              <a href="/directory" className="block transition-colors hover:underline">
                 Directory
               </a>
             </div>

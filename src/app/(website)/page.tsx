@@ -1,18 +1,5 @@
-
-import { Navbar } from "@/components/website/Navbar";
-import { CookieConsent } from "@/components/website/CookieConsent";
 import { Button } from "@/components/ui/button";
-import {
-  ArrowRightIcon,
-  ChevronRightIcon,
-  Mail,
-  Facebook,
-  Twitter,
-  Instagram,
-  Youtube,
-  Linkedin,
-} from "lucide-react";
-import { ScrollProgress } from "@/components/magic-ui/ScrollProgress";
+import { ArrowRightIcon, ChevronRightIcon } from "lucide-react";
 import { ImagesSlider } from "@/components/magic-ui/ImagesSlider";
 import Link from "next/link";
 import { HeroVideoDialog } from "@/components/magic-ui/HeroVideoDialog";
@@ -25,7 +12,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import Image from "next/image";
-import { Timeline } from '@/components/magic-ui/Timeline';
+import { Timeline } from "@/components/magic-ui/Timeline";
 import {
   Accordion,
   AccordionContent,
@@ -126,7 +113,7 @@ const chaplaincyRoadmap = [
     title: "Phase 1",
     content: (
       <div>
-            {/* Image Placeholder */}
+        {/* Image Placeholder */}
         <div className="mb-4 sm:mb-6 w-full h-40 sm:h-48 md:h-64 lg:h-80 rounded-lg bg-linear-to-br from-[#032a0d]/20 to-[#032a0d]/5 border-2 border-dashed border-[#032a0d]/30 flex items-center justify-center">
           <div className="text-center px-4">
             <div className="text-3xl sm:text-4xl mb-2">📷</div>
@@ -311,9 +298,6 @@ export default function Page() {
 
   return (
     <main className="min-h-screen">
-      <ScrollProgress className="top-0 z-60" />
-      <Navbar />
-
       <ImagesSlider
         className="relative min-h-screen text-white"
         images={images}
@@ -352,17 +336,26 @@ export default function Page() {
               <div className="justify-self-start md:justify-self-end">
                 <nav className="space-y-2 text-[10px] sm:text-xs font-semibold uppercase tracking-[0.18em]">
                   {[
-                    "Our Vision and Mission",
-                    "School of Chaplaincy",
-                    "Organizational Structure",
-                  ].map((label) => (
-                    <a
-                      key={label}
-                      href="#"
-                      className="block w-fit border-b border-white/60 pb-0.5 text-white/90 hover:text-white"
+                    {
+                      label: "Our Vision and Mission",
+                      href: "/about-pearl-of-the-orient",
+                    },
+                    {
+                      label: "School of Chaplaincy",
+                      href: "#",
+                    },
+                    {
+                      label: "Organizational Structure",
+                      href: "/organizational-structure",
+                    },
+                  ].map((item) => (
+                    <Link
+                      key={item.label}
+                      href={item.href}
+                      className="block w-fit border-b border-white/60 pb-0.5 text-white/90 hover:text-white transition-colors"
                     >
-                      {label}
-                    </a>
+                      {item.label}
+                    </Link>
                   ))}
                 </nav>
               </div>
@@ -381,13 +374,13 @@ export default function Page() {
           which of the Holy Ghost hath made you overseers, to feed the church of
           God, which he hath purchased with his own blood.
         </p>
-        <div className="grid mt-8 sm:mt-12 lg:mt-15 lg:grid-cols-2 grid-cols-1 gap-6 sm:gap-8 lg:gap-10">
+        <div className="flex items-center justify-between mt-10">
           <Link href="#" className="flex items-center group gap-3">
             <div className="border-2 border-[#032a0d] rounded-full text-[#032a0d] group-hover:text-white group-hover:bg-[#032a0d] transition-colors flex items-center justify-center size-10">
               <ChevronRightIcon strokeWidth={3} />
             </div>
             <p className="uppercase font-medium group-hover:underline text-[#032a0d]">
-              about pearl of the orient
+              pearl of the orient theological seminary & colleges inc
             </p>
           </Link>
           <Link href="#" className="flex items-center group gap-3">
@@ -395,7 +388,7 @@ export default function Page() {
               <ChevronRightIcon strokeWidth={3} />
             </div>
             <p className="uppercase font-medium group-hover:underline text-[#032a0d]">
-              pearl of the orient theological seminary & colleges inc
+              About Pearl of the orient
             </p>
           </Link>
         </div>
@@ -559,16 +552,12 @@ export default function Page() {
           >
             {/* LEFT FULL-HEIGHT ARROW */}
             <div className="absolute left-0 top-0 z-10 h-full w-4 sm:w-5 bg-white flex items-center justify-center">
-              <CarouselPrevious
-                className="static bg-white hover:bg-white shadow-none rounded-none ml-2 sm:ml-4 md:ml-10 size-8 sm:size-10 md:size-12 border-none"
-              />
+              <CarouselPrevious className="static bg-white hover:bg-white shadow-none rounded-none ml-2 sm:ml-4 md:ml-10 size-8 sm:size-10 md:size-12 border-none" />
             </div>
 
             {/* RIGHT FULL-HEIGHT ARROW */}
             <div className="absolute right-0 top-0 z-10 h-full w-4 sm:w-5 bg-white flex items-center justify-center">
-              <CarouselNext
-                className="static bg-white hover:bg-white shadow-none rounded-none mr-2 sm:mr-4 md:mr-10 size-8 sm:size-10 md:size-12 border-none"
-              />
+              <CarouselNext className="static bg-white hover:bg-white shadow-none rounded-none mr-2 sm:mr-4 md:mr-10 size-8 sm:size-10 md:size-12 border-none" />
             </div>
 
             {/* CONTENT */}
@@ -641,11 +630,7 @@ export default function Page() {
             </p>
           </div>
 
-          <Accordion
-            type="single"
-            collapsible
-            className="w-full space-y-4"
-          >
+          <Accordion type="single" collapsible className="w-full space-y-4">
             <AccordionItem
               value="item-1"
               className="border-2 border-[#032a0d]/10 rounded-lg px-4 sm:px-6 bg-white hover:border-[#032a0d]/30 transition-colors"
@@ -657,9 +642,9 @@ export default function Page() {
               <AccordionContent className="text-sm md:text-base text-neutral-700 dark:text-neutral-300 pb-4 sm:pb-6">
                 To become a member, you must first complete the entrant member
                 process, which includes attending a chaplaincy orientation,
-                submitting all required documents, completing Chaplaincy 101 as a
-                prerequisite, and participating in the oath-taking ceremony. This
-                initial phase establishes you as an Associate Chaplain with
+                submitting all required documents, completing Chaplaincy 101 as
+                a prerequisite, and participating in the oath-taking ceremony.
+                This initial phase establishes you as an Associate Chaplain with
                 Entrant/Member status.
               </AccordionContent>
             </AccordionItem>
@@ -693,11 +678,12 @@ export default function Page() {
               </AccordionTrigger>
               <AccordionContent className="text-sm md:text-base text-neutral-700 dark:text-neutral-300 pb-4 sm:pb-6">
                 To become an Ordained and Commissioned Chaplain (Phase 3), you
-                must be a graduate of any bachelor&apos;s degree program, complete
-                both pre-test and post-test assessments, successfully complete
-                supervised OJT (On-the-Job Training), and participate in the
-                covenant bow ceremony. This phase represents a significant
-                commitment to chaplaincy ministry and values education.
+                must be a graduate of any bachelor&apos;s degree program,
+                complete both pre-test and post-test assessments, successfully
+                complete supervised OJT (On-the-Job Training), and participate
+                in the covenant bow ceremony. This phase represents a
+                significant commitment to chaplaincy ministry and values
+                education.
               </AccordionContent>
             </AccordionItem>
 
@@ -710,13 +696,14 @@ export default function Page() {
                 Officer/Instructor?
               </AccordionTrigger>
               <AccordionContent className="text-sm md:text-base text-neutral-700 dark:text-neutral-300 pb-4 sm:pb-6">
-                To achieve Certified Specialist Training Officer/Instructor status
-                (Phase 4), you must have at least one active chaplaincy ministry,
-                establish partnerships with local churches, form partnerships with
-                public or private institutions, obtain certification as a training
-                officer/instructor, and optionally complete CRASM (Certified
-                Religious and Spiritual Ministry) pinning. This represents the
-                highest level of chaplaincy certification.
+                To achieve Certified Specialist Training Officer/Instructor
+                status (Phase 4), you must have at least one active chaplaincy
+                ministry, establish partnerships with local churches, form
+                partnerships with public or private institutions, obtain
+                certification as a training officer/instructor, and optionally
+                complete CRASM (Certified Religious and Spiritual Ministry)
+                pinning. This represents the highest level of chaplaincy
+                certification.
               </AccordionContent>
             </AccordionItem>
 
@@ -729,12 +716,12 @@ export default function Page() {
               </AccordionTrigger>
               <AccordionContent className="text-sm md:text-base text-neutral-700 dark:text-neutral-300 pb-4 sm:pb-6">
                 Chaplains can serve in various ministry settings including
-                hospitals, schools, military, prisons, corporate environments, and
-                community organizations. Our chaplains provide spiritual care,
-                values education, counseling, and support services. We also
-                facilitate partnerships with local churches and institutions to
-                expand ministry reach and impact in communities both locally and
-                internationally.
+                hospitals, schools, military, prisons, corporate environments,
+                and community organizations. Our chaplains provide spiritual
+                care, values education, counseling, and support services. We
+                also facilitate partnerships with local churches and
+                institutions to expand ministry reach and impact in communities
+                both locally and internationally.
               </AccordionContent>
             </AccordionItem>
           </Accordion>
@@ -752,351 +739,6 @@ export default function Page() {
           </div>
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="bg-slate-100">
-        {/* Top Section */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 lg:py-12">
-          {/* Organization Name */}
-          <div className="text-center mb-6 sm:mb-8 lg:mb-10">
-            <h2 className="font-serif text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-[#032a0d] px-2">
-              PEARL OF THE ORIENT INTERNATIONAL AUXILIARY
-            </h2>
-            <h3 className="font-serif text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-[#032a0d] mt-1 sm:mt-2 px-2">
-              CHAPLAIN VALUES EDUCATORS INC.
-            </h3>
-          </div>
-
-          {/* Links Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-6 gap-6 sm:gap-8">
-            {/* Column 1: Connect With Us */}
-            <div>
-              <h4 className="font-semibold text-[#032a0d] text-sm sm:text-base mb-3 sm:mb-4 underline">
-                Connect With Us
-              </h4>
-              <ul className="space-y-2">
-                <li>
-                  <Link
-                    href="#"
-                    className="text-sm text-[#032a0d]/70 hover:text-[#032a0d] transition-colors"
-                  >
-                    Contact Us
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="#"
-                    className="text-sm text-[#032a0d]/70 hover:text-[#032a0d] transition-colors"
-                  >
-                    Directory
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="#"
-                    className="text-sm text-[#032a0d]/70 hover:text-[#032a0d] transition-colors"
-                  >
-                    Social Media
-                  </Link>
-                </li>
-              </ul>
-            </div>
-
-            {/* Column 2: Information for */}
-            <div>
-              <h4 className="font-semibold text-[#032a0d] text-sm sm:text-base mb-3 sm:mb-4 underline">
-                Information for
-              </h4>
-              <ul className="space-y-2">
-                <li>
-                  <Link
-                    href="#"
-                    className="text-sm text-[#032a0d]/70 hover:text-[#032a0d] transition-colors"
-                  >
-                    Current Students
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="#"
-                    className="text-sm text-[#032a0d]/70 hover:text-[#032a0d] transition-colors"
-                  >
-                    Prospective Students
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="#"
-                    className="text-sm text-[#032a0d]/70 hover:text-[#032a0d] transition-colors"
-                  >
-                    Chaplains & Members
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="#"
-                    className="text-sm text-[#032a0d]/70 hover:text-[#032a0d] transition-colors"
-                  >
-                    Faculty & Staff
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="#"
-                    className="text-sm text-[#032a0d]/70 hover:text-[#032a0d] transition-colors"
-                  >
-                    Alumni
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="#"
-                    className="text-sm text-[#032a0d]/70 hover:text-[#032a0d] transition-colors"
-                  >
-                    Partners & Donors
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="#"
-                    className="text-sm text-[#032a0d]/70 hover:text-[#032a0d] transition-colors"
-                  >
-                    Visitors & Media
-                  </Link>
-                </li>
-              </ul>
-            </div>
-
-            {/* Column 3: Security & Emergency */}
-            <div>
-              <h4 className="font-semibold text-[#032a0d] text-sm sm:text-base mb-3 sm:mb-4 underline">
-                Security & Emergency
-              </h4>
-              <ul className="space-y-2">
-                <li>
-                  <Link
-                    href="#"
-                    className="text-sm text-[#032a0d]/70 hover:text-[#032a0d] transition-colors"
-                  >
-                    Campus Safety
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="#"
-                    className="text-sm text-[#032a0d]/70 hover:text-[#032a0d] transition-colors"
-                  >
-                    Network & Tech
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="#"
-                    className="text-sm text-[#032a0d]/70 hover:text-[#032a0d] transition-colors"
-                  >
-                    Emergency Management
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="#"
-                    className="text-sm text-[#032a0d]/70 hover:text-[#032a0d] transition-colors"
-                  >
-                    Disaster Preparedness
-                  </Link>
-                </li>
-              </ul>
-            </div>
-
-            {/* Column 4: Digital Resources */}
-            <div>
-              <h4 className="font-semibold text-[#032a0d] text-sm sm:text-base mb-3 sm:mb-4 underline">
-                Digital Resources
-              </h4>
-              <ul className="space-y-2">
-                <li>
-                  <Link
-                    href="#"
-                    className="text-sm text-[#032a0d]/70 hover:text-[#032a0d] transition-colors"
-                  >
-                    Online Portal
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="#"
-                    className="text-sm text-[#032a0d]/70 hover:text-[#032a0d] transition-colors"
-                  >
-                    Resource Library
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="#"
-                    className="text-sm text-[#032a0d]/70 hover:text-[#032a0d] transition-colors"
-                  >
-                    Student Portal
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="#"
-                    className="text-sm text-[#032a0d]/70 hover:text-[#032a0d] transition-colors"
-                  >
-                    Staff Email
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="#"
-                    className="text-sm text-[#032a0d]/70 hover:text-[#032a0d] transition-colors"
-                  >
-                    Alumni Portal
-                  </Link>
-                </li>
-              </ul>
-            </div>
-
-            {/* Column 5: Policies & Legal */}
-            <div>
-              <h4 className="font-semibold text-[#032a0d] text-sm sm:text-base mb-3 sm:mb-4 underline">
-                Policies & Legal
-              </h4>
-              <ul className="space-y-2">
-                <li>
-                  <Link
-                    href="#"
-                    className="text-sm text-[#032a0d]/70 hover:text-[#032a0d] transition-colors"
-                  >
-                    Data Privacy
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="#"
-                    className="text-sm text-[#032a0d]/70 hover:text-[#032a0d] transition-colors"
-                  >
-                    Terms of Use
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="#"
-                    className="text-sm text-[#032a0d]/70 hover:text-[#032a0d] transition-colors"
-                  >
-                    Report Website Issues
-                  </Link>
-                </li>
-              </ul>
-            </div>
-
-            {/* Column 6: Network */}
-            <div>
-              <h4 className="font-semibold text-[#032a0d] text-sm sm:text-base mb-3 sm:mb-4 underline">
-                Network
-              </h4>
-              <ul className="space-y-2">
-                <li>
-                  <Link
-                    href="#"
-                    className="text-sm text-[#032a0d]/70 hover:text-[#032a0d] transition-colors"
-                  >
-                    Partner Organizations
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="#"
-                    className="text-sm text-[#032a0d]/70 hover:text-[#032a0d] transition-colors"
-                  >
-                    International Network
-                  </Link>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        {/* Bottom Section */}
-        <div className="bg-[#032a0d] text-white py-4 sm:py-5 lg:py-6">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex flex-col md:flex-row items-center justify-between gap-3 sm:gap-4">
-              {/* Copyright and Contact */}
-              <div className="text-xs sm:text-sm text-center md:text-left">
-                <div className="flex flex-col sm:flex-row items-center sm:items-start gap-1 sm:gap-0">
-                  <span className="block sm:inline">
-                    Copyright © {new Date().getFullYear()} Pearl of the Orient
-                    International Auxiliary Chaplain Values Educators Inc. All
-                    rights reserved.
-                  </span>
-                  <span className="hidden sm:inline mx-2">|</span>
-                  <a
-                    href="mailto:info@pearloftheorient.org"
-                    className="hover:underline block sm:inline"
-                  >
-                    info@pearloftheorient.org
-                  </a>
-                  <span className="hidden sm:inline mx-2">|</span>
-                  <a
-                    href="tel:+63284266001"
-                    className="hover:underline block sm:inline"
-                  >
-                    +63 2 8426 6001
-                  </a>
-                </div>
-              </div>
-
-              {/* Social Media Icons */}
-              <div className="flex items-center gap-3 sm:gap-4 shrink-0">
-                <a
-                  href="mailto:info@pearloftheorient.org"
-                  aria-label="Email"
-                  className="hover:opacity-80 transition-opacity"
-                >
-                  <Mail className="size-4 sm:size-5" />
-                </a>
-                <a
-                  href="#"
-                  aria-label="Facebook"
-                  className="hover:opacity-80 transition-opacity"
-                >
-                  <Facebook className="size-4 sm:size-5" />
-                </a>
-                <a
-                  href="#"
-                  aria-label="Twitter"
-                  className="hover:opacity-80 transition-opacity"
-                >
-                  <Twitter className="size-4 sm:size-5" />
-                </a>
-                <a
-                  href="#"
-                  aria-label="Instagram"
-                  className="hover:opacity-80 transition-opacity"
-                >
-                  <Instagram className="size-4 sm:size-5" />
-                </a>
-                <a
-                  href="#"
-                  aria-label="YouTube"
-                  className="hover:opacity-80 transition-opacity"
-                >
-                  <Youtube className="size-4 sm:size-5" />
-                </a>
-                <a
-                  href="#"
-                  aria-label="LinkedIn"
-                  className="hover:opacity-80 transition-opacity"
-                >
-                  <Linkedin className="size-4 sm:size-5" />
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </footer>
-
-      <CookieConsent />
     </main>
   );
 }
@@ -1129,7 +771,9 @@ const SingleCard = ({ item }: SingleCardProps) => (
         px-4 sm:px-6 py-6 sm:py-8 md:py-10 text-center
       "
       >
-        <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white">{item.date}</h3>
+        <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white">
+          {item.date}
+        </h3>
         <p className="mt-2 text-xs sm:text-sm text-zinc-100">Vol.55 No.13</p>
       </div>
     </div>
@@ -1156,8 +800,12 @@ const StackedCard = ({ item }: StackedCardProps) => (
         px-4 sm:px-6 py-4 sm:py-6 md:py-8 text-center
       "
       >
-        <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white">{item.date}</h3>
-        <p className="mt-1 sm:mt-2 text-xs sm:text-sm text-zinc-100">Vol.55 No.13</p>
+        <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white">
+          {item.date}
+        </h3>
+        <p className="mt-1 sm:mt-2 text-xs sm:text-sm text-zinc-100">
+          Vol.55 No.13
+        </p>
       </div>
     </div>
   </div>
