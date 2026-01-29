@@ -1,6 +1,13 @@
-import { clerkMiddleware } from "@clerk/nextjs/server";
+import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 
-export default clerkMiddleware();
+// Routes that must work without sign-in (e.g. chatbot)
+const isPublicApiRoute = createRouteMatcher(["/api/chat"]);
+
+export default clerkMiddleware(async (auth, req) => {
+  // Allow /api/chat without auth so the Pearl Assistant works for all visitors
+  if (isPublicApiRoute(req)) return;
+  // Add auth.protect() here only for routes you want to require sign-in
+});
 
 export const config = {
   matcher: [

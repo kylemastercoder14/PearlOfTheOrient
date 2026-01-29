@@ -2,6 +2,31 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
+### Pearl Assistant (Vapi chat)
+
+The site’s chat assistant uses [Vapi](https://vapi.ai). Configure it via environment variables:
+
+- **`VAPI_API_KEY`** – Your Vapi **private** API key (not the public key). In the [dashboard](https://dashboard.vapi.ai): Profile → Vapi API Keys → copy the **Private API Key**.
+- **`VAPI_ASSISTANT_ID`** – The assistant ID from your Vapi assistant (from the assistant URL or details).
+
+Add these to `.env.local` (never commit real keys). If they’re missing, the chat API returns a “not configured” message.
+
+**Voice Assistant (Web SDK)** uses the **public** key and assistant ID in the browser:
+
+- **`NEXT_PUBLIC_VAPI_PUBLIC_KEY`** – Your Vapi **public** API key (Profile → Vapi API Keys → **Public API Key**).
+- **`NEXT_PUBLIC_VAPI_ASSISTANT_ID`** – Same assistant ID as above.
+
+These are safe to expose in the client; the voice widget uses the [Vapi Web SDK](https://docs.vapi.ai/quickstart/web).
+
+**Testing voice on a phone:** Microphone only works on **secure contexts** (HTTPS or `localhost`). If you open the site from your phone using `http://YOUR_IP:3000`, the browser will block the mic without showing a permission prompt. To test voice on mobile:
+
+1. Run the dev server with HTTPS: `bun run dev:https` (or `npm run dev:https`).
+2. On your computer, get your local IP (e.g. `192.168.1.100`).
+3. On your phone (same Wi‑Fi), open **https://YOUR_IP:3000** (use `https`, not `http`).
+4. Accept the browser’s self-signed certificate warning if it appears, then try Start call again.
+
+## Getting Started
+
 First, run the development server:
 
 ```bash
