@@ -312,8 +312,9 @@ export default function Page() {
               Join a community devoted to spiritual growth, leadership
               development, and kingdom service
             </div>
-            <h1 className="mt-6 sm:mt-8 md:mt-10 font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl leading-[0.95] px-4">
-              Serve the Church and the World.
+            <h1 className="mt-6 sm:mt-8 md:mt-10 font-serif text-2xl sm:text-3xl capitalize md:text-4xl lg:text-5xl xl:text-6xl px-4">
+
+              The best way to find yourself is to lose in the service of others
             </h1>
             <Button
               size="lg"
