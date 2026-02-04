@@ -18,6 +18,22 @@ const requirementKeys = [
   "letter_of_intent",
 ] as const;
 
+const VALID_BRANCH_OF_SERVICE = [
+  "Humanitarian",
+  "Hospital and Care",
+  "Military/PNP",
+  "School",
+  "Corporate",
+  "Disaster & Rescue Operations",
+  "Prison",
+  "Security",
+  "Government",
+  "DSWD",
+  "Others",
+] as const;
+
+type BranchOfService = (typeof VALID_BRANCH_OF_SERVICE)[number];
+
 /** Get current user's draft (if any). */
 export const getDraft = query({
   args: {},
@@ -213,7 +229,9 @@ export const submitApplication = mutation({
         | undefined,
       skillsTalents: (form.skillsTalents as string) || undefined,
       branchOfService: Array.isArray(form.branchOfService)
-        ? (form.branchOfService as string[])
+        ? (form.branchOfService as string[]).filter((b): b is BranchOfService =>
+            VALID_BRANCH_OF_SERVICE.includes(b as BranchOfService)
+          )
         : undefined,
       branchOfServiceOthers:
         (form.branchOfServiceOthers as string) || undefined,
