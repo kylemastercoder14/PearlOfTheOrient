@@ -159,14 +159,30 @@ export function OnboardingStepChaplaincy101({
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  const normalizeLessonIds = (lessonIds: number[]) => {
+    const validLessonIds = new Set(CHAPLAINCY_LESSONS.map((lesson) => lesson.id));
+    return [...new Set((lessonIds ?? []).filter((id) => validLessonIds.has(id)))].sort(
+      (a, b) => a - b,
+    );
+  };
+
   useEffect(() => {
     if (typeof window === "undefined") return;
     setOrigin(window.location.origin);
   }, []);
 
   useEffect(() => {
-    setCompletedLessonIds(initialCompletedLessonIds ?? []);
-    setEssayAnswers(initialEssayAnswers ?? {});
+    const nextCompleted = normalizeLessonIds(initialCompletedLessonIds ?? []);
+    setCompletedLessonIds((prev) => {
+      const merged = [...new Set([...prev, ...nextCompleted])].sort((a, b) => a - b);
+      return JSON.stringify(prev) === JSON.stringify(merged) ? prev : merged;
+    });
+
+    setEssayAnswers((prev) => {
+      const incoming = initialEssayAnswers ?? {};
+      const merged: Record<number, string> = { ...incoming, ...prev };
+      return JSON.stringify(prev) === JSON.stringify(merged) ? prev : merged;
+    });
   }, [initialCompletedLessonIds, initialEssayAnswers]);
 
   const completedLessonsCount = completedLessonIds.length;
@@ -194,6 +210,38 @@ export function OnboardingStepChaplaincy101({
       }
       return next;
     });
+  };
+
+  const persistLessonCompletion = (lessonId: number) => {
+    setCompletedLessonIds((prev) => {
+      const next = prev.includes(lessonId) ? prev : [...prev, lessonId].sort((a, b) => a - b);
+      if (next !== prev) {
+        void onProgressChangeAction({
+          completedLessonIds: next,
+          essayAnswers,
+        });
+      }
+      return next;
+    });
+  };
+
+  const goToAdjacentLessonAction = (direction: "prev" | "next") => {
+    if (!activeLesson) return;
+    const currentIndex = CHAPLAINCY_LESSONS.findIndex(
+      (lesson) => lesson.id === activeLesson.id,
+    );
+    if (currentIndex < 0) return;
+
+    const adjacentIndex = direction === "next" ? currentIndex + 1 : currentIndex - 1;
+    const adjacentLesson = CHAPLAINCY_LESSONS[adjacentIndex];
+    if (!adjacentLesson) return;
+
+    if (direction === "next") {
+      persistLessonCompletion(activeLesson.id);
+    }
+
+    setActiveLesson(adjacentLesson);
+    setIsLessonDialogOpen(true);
   };
 
   const activeLessonViewerUrl = useMemo(() => {
@@ -473,7 +521,35 @@ export function OnboardingStepChaplaincy101({
             )}
 
             {activeLesson && (
-              <div className="mt-3">
+              <div className="mt-3 flex flex-wrap items-center gap-2">
+                <Button
+                  type="button"
+                  variant="outline"
+                  className="h-9 border-[#032a0d]/30 text-xs text-[#032a0d] hover:bg-[#032a0d]/5"
+                  onClick={() => goToAdjacentLessonAction("prev")}
+                  disabled={activeLesson.id === 1}
+                >
+                  Previous lesson
+                </Button>
+                <Button
+                  type="button"
+                  variant="outline"
+                  className="h-9 border-[#032a0d]/30 text-xs text-[#032a0d] hover:bg-[#032a0d]/5"
+                  onClick={() => persistLessonCompletion(activeLesson.id)}
+                  disabled={completedLessonIds.includes(activeLesson.id)}
+                >
+                  {completedLessonIds.includes(activeLesson.id)
+                    ? "Already completed"
+                    : "Mark as completed"}
+                </Button>
+                <Button
+                  type="button"
+                  className="h-9 bg-[#032a0d] text-xs hover:bg-[#032a0d]/90"
+                  onClick={() => goToAdjacentLessonAction("next")}
+                  disabled={activeLesson.id === totalLessons}
+                >
+                  Complete and next
+                </Button>
                 <a
                   href={encodeURI(activeLesson.filePath)}
                   target="_blank"
