@@ -52,7 +52,8 @@ export function OnboardingWizard({ application, onMetaChangeAction }: Props) {
   const { data: currentPaymentCheckout } = useCurrentMemberPaymentCheckoutQuery();
   const { data: currentOnlineInterview } =
     useCurrentMemberOnlineInterviewAppointmentQuery();
-  const { data: currentIdGenerationAsset } = useCurrentMemberIdGenerationAssetQuery();
+  const { data: currentIdGenerationAsset, refetch: refetchCurrentIdGenerationAsset } =
+    useCurrentMemberIdGenerationAssetQuery();
   const { data: currentChaplaincyTraining } =
     useCurrentMemberChaplaincyTrainingProgressQuery();
   const { data: currentOnboardingProgress } =
@@ -318,6 +319,13 @@ export function OnboardingWizard({ application, onMetaChangeAction }: Props) {
     });
   }, [currentChaplaincyTraining, currentStepId, toast, updateOnboardingStepMutation]);
 
+  useEffect(() => {
+    if (currentStepId !== "oath_taking") return;
+    if (currentIdGenerationAsset?.data.uniqueId) return;
+
+    void refetchCurrentIdGenerationAsset();
+  }, [currentStepId, currentIdGenerationAsset, refetchCurrentIdGenerationAsset]);
+
   const handleAttachmentUpload = async (key: RequirementKey, file: File) => {
     const uploaded = await uploadRequirementMutation.mutateAsync(file);
     const uploadedUrl = uploaded?.ufsUrl || uploaded?.url;
@@ -483,7 +491,9 @@ export function OnboardingWizard({ application, onMetaChangeAction }: Props) {
         />
       )}
       {currentStepId === "oath_taking" && (
-        <OnboardingStepOathTaking uniqueId={application.uniqueId} />
+        <OnboardingStepOathTaking
+          uniqueId={currentIdGenerationAsset?.data.uniqueId ?? "Not yet assigned"}
+        />
       )}
     </div>
   );
