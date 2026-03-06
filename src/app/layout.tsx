@@ -5,6 +5,8 @@ import QueryProvider from "@/components/providers/Query";
 import "./globals.css";
 
 const siteUrl = process.env.NEXT_PUBLIC_WEBSITE_URL ?? "https://pearlchaplaincy.org";
+const ogImagePath = "/og-image.jpg";
+const ogImageAbsoluteUrl = new URL(ogImagePath, siteUrl).toString();
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -43,10 +45,11 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/main/landing.jpg",
+        url: ogImagePath,
         width: 1200,
         height: 630,
         alt: "Pearl Chaplaincy",
+        type: "image/jpeg",
       },
     ],
   },
@@ -56,7 +59,12 @@ export const metadata: Metadata = {
       "Pearl of the Orient International Auxiliary Chaplain Values Educators Inc.",
     description:
       "Bring national-transformation and nation-building through bible-based values education to different sectors of our society.",
-    images: ["/main/landing.jpg"],
+    images: [ogImagePath],
+  },
+  other: {
+    "og:image:secure_url": ogImageAbsoluteUrl,
+    "og:image:type": "image/jpeg",
+    "twitter:image:alt": "Pearl Chaplaincy",
   },
 };
 
